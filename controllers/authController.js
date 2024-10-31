@@ -7,7 +7,7 @@ class AuthController {
         try {
             const { name, email, password } = req.body;
             const user = await authService.register(name, email, password);
-            responseHandler.sendSuccess(res, 'User registered successfully', { userId: user.insertId });
+            responseHandler.sendSuccess(res, 'User registered successfully', { userId: user.insertId }, 201);
         } catch (error) {
             responseHandler.sendError(res, error.message);
         }
