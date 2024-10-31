@@ -1,6 +1,5 @@
 const authService = require('../services/authService');
 const responseHandler = require('../utils/responseHandler');
-const userRepository = require('../repositories/userRepository');
 const CustomError = require('../utils/CustomError');
 
 class AuthController {
