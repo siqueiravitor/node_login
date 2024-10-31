@@ -1,5 +1,6 @@
 const authService = require('../services/authService');
 const responseHandler = require('../utils/responseHandler');
+const userRepository = require('../repositories/userRepository');
 const CustomError = require('../utils/CustomError');
 
 class AuthController {
@@ -20,6 +21,23 @@ class AuthController {
             responseHandler.sendSuccess(res, 'Successfully logged in', { user, token });
         } catch (error) {
             if(error instanceof CustomError){
+                responseHandler.sendError(res, error.message, error.statusCode);
+            } else {
+                responseHandler.sendError(res, 'An unexpected error occurred', 500);
+            }
+        }
+    }
+
+    async getProfile(req, res){
+        try {
+            const id_user = req.userId
+
+            const user = await userRepository.getUserById(id_user);
+            if (!user) throw new CustomError('User not found', 404);
+
+            responseHandler.sendSuccess(res, 'User profile returned successfully', { user });
+        } catch (error) {
+            if (error instanceof CustomError) {
                 responseHandler.sendError(res, error.message, error.statusCode);
             } else {
                 responseHandler.sendError(res, 'An unexpected error occurred', 500);

@@ -8,6 +8,10 @@ class UserRepository {
     async getUserByEmail(email) {
         return await userModel.findUserByEmail(email);
     }
+
+    async getUserById(id) {
+        return await userModel.findUserById(id);
+    }
 }
 
 module.exports = new UserRepository();

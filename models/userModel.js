@@ -17,6 +17,13 @@ class UserModel {
         await connection.end();
         return rows.length > 0 ? rows[0] : null;
     }
+
+    async findUserById(id){
+        const connection = await createConnection();
+        const [rows] = await connection.execute('SELECT id, name, email, status, created_at, updated_at FROM users WHERE id = ?', [id]);
+        await connection.end();
+        return rows.length > 0 ? rows[0] : null;
+    }
 }
 
 module.exports = new UserModel();
