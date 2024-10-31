@@ -31,10 +31,7 @@ class AuthController {
     async getProfile(req, res){
         try {
             const id_user = req.userId
-
-            const user = await userRepository.getUserById(id_user);
-            if (!user) throw new CustomError('User not found', 404);
-
+            const { user } = await authService.profile(id_user);
             responseHandler.sendSuccess(res, 'User profile returned successfully', { user });
         } catch (error) {
             if (error instanceof CustomError) {

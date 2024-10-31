@@ -29,6 +29,12 @@ class AuthService {
         return { user, token };
     }
 
+    async profile(id_user){
+        const user = await userRepository.getUserById(id_user);
+        if (!user) throw new CustomError('User not found', 404);
+
+        return { user };
+    }
 }
 
 module.exports = new AuthService();
