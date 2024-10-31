@@ -1,5 +1,6 @@
 const authService = require('../services/authService');
 const responseHandler = require('../utils/responseHandler');
+const CustomError = require('../utils/CustomError');
 
 class AuthController {
     async register(req, res) {
@@ -18,7 +19,11 @@ class AuthController {
             const { user, token } = await authService.login(email, password);
             responseHandler.sendSuccess(res, 'Successfully logged in', { user, token });
         } catch (error) {
-            responseHandler.sendError(res, error.message);
+            if(error instanceof CustomError){
+                responseHandler.sendError(res, error.message, error.statusCode);
+            } else {
+                responseHandler.sendError(res, 'An unexpected error occurred', 500);
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ class UserModel {
 
     async findUserByEmail(email) {
         const connection = await createConnection();
-        const [rows] = await connection.execute('SELECT * FROM users WHERE email = ?', [email]);
+        const [rows] = await connection.execute('SELECT id, name, email, password, status FROM users WHERE email = ?', [email]);
         await connection.end();
         return rows.length > 0 ? rows[0] : null;
     }
