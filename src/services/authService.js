@@ -31,6 +31,13 @@ class AuthService {
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET || '123', { expiresIn: '1h' });
         return { user: data, token };
     }
+
+    async me(id){
+        const user = await userRepository.getUserById(id);
+        if (!user) throw new CustomError('User not found', 404);
+
+        return user;
+    }
 }
 
 module.exports = new AuthService();

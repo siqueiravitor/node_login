@@ -26,6 +26,21 @@ class AuthController {
             }
         }
     }
+
+    async me(req, res) {
+        try{
+            const id_user = req.userId;
+            const user = await authService.me(id_user);
+
+            responseHandler.sendSuccess(res, 'User data returned successfully', { user });
+        } catch (error) {
+            if(error instanceof CustomError){
+                responseHandler.sendError(res, error.message, error.statusCode);
+            } else {
+                responseHandler.sendError(res, 'An unexpected error occurred', 500);
+            }
+        }
+    }
 }
 
 module.exports = new AuthController();
