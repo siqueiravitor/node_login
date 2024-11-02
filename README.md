@@ -18,6 +18,7 @@ A RESTful API for user authentication, built with **Node.js**, **Express**, **SQ
 - **JWT** (JSON Web Tokens) for secure authentication
 - **bcrypt** for password hashing
 - **dotenv** for managing environment variables
+- **cors** for security feature
 
 ## Architecture
 
@@ -88,6 +89,7 @@ API Endpoints
 | -------------------- | ------- | ----------------------- |
 | `/auth/register`     |  POST   | Register a new user     |
 | `/auth/login`        |  POST   | Log in an existing user |
+| `/auth/me`           |  GET    | Get user data by Token  |
 | `/user/all`          |  GET    | Get all users           |
 | `/user/profile/:id`  |  GET    | Get user details        |
 | `/user/update/:id`   |  PATCH  | Update user information |
@@ -100,6 +102,7 @@ flowchart TB;
 
     Authenticated -->|No| Unauthorized;
 
+    Authenticated --> me;
     Authenticated --> GetAllUsers;
     Authenticated --> GetUserData;
     Authenticated --> UpdateUser;
