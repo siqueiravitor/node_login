@@ -14,6 +14,7 @@ A RESTful API for user authentication, built with **Node.js**, **Express**, **SQ
 
 - **Node.js** & **Express** for server and routing
 - **SQLite** as the relational database
+- **Sequelize** as ORM for assiting queries
 - **JWT** (JSON Web Tokens) for secure authentication
 - **bcrypt** for password hashing
 - **dotenv** for managing environment variables
@@ -66,17 +67,6 @@ This project follows **Clean Architecture** principles with a focus on **SOLID**
 
 ---
 
-API Endpoints
-
-| Endpoint             | Method  | Description             |
-| -------------------- | ------- | ----------------------- |
-| `/auth/register`     |  POST   | Register a new user     |
-| `/auth/login`        |  POST   | Log in an existing user |
-| `/user/all`          |  GET    | Get all users           |
-| `/user/profile/:id`  |  GET    | Get user details        |
-| `/user/update/:id`   |  PATCH  | Update user information |
-| `/user/delete/:id`   |  DELETE | Delete user             |
-
 Folder Structure
 
     ```bash
@@ -89,7 +79,33 @@ Folder Structure
     │   ├── config        # Database configuration
     │   └── app.js        # Application entry point
     └── .env              # Environment variables
-    ```
+
+ 
+
+API Endpoints
+
+| Endpoint             | Method  | Description             |
+| -------------------- | ------- | ----------------------- |
+| `/auth/register`     |  POST   | Register a new user     |
+| `/auth/login`        |  POST   | Log in an existing user |
+| `/user/all`          |  GET    | Get all users           |
+| `/user/profile/:id`  |  GET    | Get user details        |
+| `/user/update/:id`   |  PATCH  | Update user information |
+| `/user/delete/:id`   |  DELETE | Delete user             |
+
+```mermaid
+flowchart TB;
+    Register --> Login;
+    Login    --> Authenticated{Authenticated?};
+
+    Authenticated -->|No| Unauthorized;
+
+    Authenticated --> GetAllUsers;
+    Authenticated --> GetUserData;
+    Authenticated --> UpdateUser;
+    Authenticated --> DeleteUser;
+```
+ 
 
 # Contributing
 1. Fork the project
