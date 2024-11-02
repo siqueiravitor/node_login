@@ -1,6 +1,6 @@
 # Node.js Authentication API
 
-A RESTful API for user authentication, built with **Node.js**, **Express**, and **SQLite**. This project adheres to **SOLID principles**, **Clean Architecture**, and **Clean Code** standards, ensuring modularity and ease of maintenance.
+A RESTful API for user authentication, built with **Node.js**, **Express**, **SQLite** and **Sequelize**. This project adheres to **SOLID principles**, **Clean Architecture**, and **Clean Code** standards, ensuring modularity and ease of maintenance.
 
 ## Features
 
